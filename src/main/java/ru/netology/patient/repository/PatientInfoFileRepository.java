@@ -43,7 +43,8 @@ public class PatientInfoFileRepository implements PatientInfoRepository {
             patientInfo.getBirthday(),
             patientInfo.getHealthInfo());
 
-        try (Scanner scanner = new Scanner(repoFile); FileWriter writer = new FileWriter(repoFile, true)) {
+        try (Scanner scanner = new Scanner(repoFile);
+             FileWriter writer = new FileWriter(repoFile, true)) {
             while (scanner.hasNextLine()) {
                 PatientInfo existsValue = mapper.readValue(scanner.nextLine(), PatientInfo.class);
                 if (isPatientExist(patientInfo, existsValue)) {
@@ -74,6 +75,7 @@ public class PatientInfoFileRepository implements PatientInfoRepository {
     public PatientInfo update(PatientInfo patientInfo) {
         throw new RuntimeException("Not implemented");
     }
+
 
     private static void createRepoFileIfNotExists(File repoFile) {
         if (!Files.exists(repoFile.toPath())) {
